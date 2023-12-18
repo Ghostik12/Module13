@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Reflection;
+using System.Security.Authentication;
 using System.Text;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -9,63 +11,35 @@ namespace Module13
 {
     class Program
     {
+        private static Dictionary<string, Contact> PhoneBook = new Dictionary<string, Contact>()
+        {
+            ["Seva"] = new Contact(5435435345, "dfsgsdg@dfsfsdf"),
+            ["Nastya"] = new Contact(4534535, "dfgdfgdfg#$43534")
+        };
         static void Main(string[] args)
         {
-            //int[] myArray = { 3, 4, 25, 23 };
-            //Check check = new Check();
-            //check.CheckArray(myArray); 
-            //Console.WriteLine(check.CheckArray(myArray));
+            //Console.WriteLine("Текущий список");
+            //WriteContactsAll();
+            var stopWatch = Stopwatch.StartNew();
+            PhoneBook.Add("Dima", new Contact(2432342423, "csgsdsdf@dsfgfdsaf"));
+            Console.WriteLine(stopWatch.Elapsed.TotalMilliseconds);
+            //Console.WriteLine("Обнавленный список");
+            //WriteContactsAll();
 
-            //var months = new[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-            //var numbers = new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-            //var mas = new ArrayList { 1, "Nastya", 2, 5, "Seva" };
-            //int sum = 0;
-            //StringBuilder sb = new StringBuilder();
+            //if (PhoneBook.TryGetValue("Dima", out Contact contact))
+            //    contact.PhoneNumber = 345345345345;
 
-            //var array = new ArrayList();
-            //foreach (var number in numbers)
-            //{
-            //    array.Add(months[number - 1]);
-            //    array.Add(number);
-            //}
-
-            //foreach (var number in array)
-            //    Console.WriteLine(number);
-
-            //foreach (var number in mas)
-            //{
-            //    if (number is int)
-            //        sum += (int)number;
-
-            //    if(number is string)
-            //        sb.Append(number);
-            //}
-            //var result = new ArrayList() { sum, sb.ToString() };
-
-            //foreach (var number in result)
-            //    Console.WriteLine(number);
-
-
-            while (true)
-            {
-                var str = Console.ReadLine();
-                var characters = str.ToCharArray();
-                var symbols = new HashSet<char>();
-                var signs = new[] { ',', ' ', '.' };
-                var numbers = new[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
-                foreach (char c in characters)
-                    symbols.Add(c);
-
-                Console.WriteLine($"Количество не повторяющихся символов в строке: {symbols.Count}");
-
-                bool containsNumber = symbols.Overlaps(numbers);
-                Console.WriteLine($"Содержит ли коллекция цифры: {containsNumber}");
-
-                symbols.ExceptWith(signs);
-                Console.WriteLine($"Символов без знаков: {symbols.Count}");
-
-            }
+            //Console.WriteLine("Список после изменений");
+            //WriteContactsAll();
         }
+        
+        //public static void WriteContactsAll()
+        //{
+        //    foreach (var contact in PhoneBook)
+        //    {
+        //        Console.Write(contact.Key + ": " + contact.Value.PhoneNumber);
+        //        Console.WriteLine();
+        //    }
+        //}
     }
 }

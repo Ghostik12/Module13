@@ -8,15 +8,15 @@ namespace Module13
 {
     class Contact
     {
-        public Contact(string name, long phoneNumber, String email)
+        public Contact(long phoneNumber, String email)
         {
-            Name = name;
+           // Name = name;
             PhoneNumber = phoneNumber;
             Email = email;
         }
 
-        public String Name { get; }
-        public long PhoneNumber { get; }
-        public String Email { get; }
+        //public String Name { get; }
+        private long PhoneNumber { get; set; }
+        private String Email { get; set; }
     }
 }
