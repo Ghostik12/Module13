@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Reflection;
 using System.Security.Authentication;
 using System.Text;
@@ -11,35 +12,34 @@ namespace Module13
 {
     class Program
     {
-        private static Dictionary<string, Contact> PhoneBook = new Dictionary<string, Contact>()
-        {
-            ["Seva"] = new Contact(5435435345, "dfsgsdg@dfsfsdf"),
-            ["Nastya"] = new Contact(4534535, "dfgdfgdfg#$43534")
-        };
+        private static Stack<string> PhoneBook = new Stack<string>();
         static void Main(string[] args)
         {
-            //Console.WriteLine("Текущий список");
-            //WriteContactsAll();
-            var stopWatch = Stopwatch.StartNew();
-            PhoneBook.Add("Dima", new Contact(2432342423, "csgsdsdf@dsfgfdsaf"));
-            Console.WriteLine(stopWatch.Elapsed.TotalMilliseconds);
-            //Console.WriteLine("Обнавленный список");
-            //WriteContactsAll();
+            Console.WriteLine("Введите слово и нажмите Enter, чтобы добавить его в стек или Введите pop если хотите удалить полседнее слово, или peek если хотите увидеть последнее слово или пропустите.");
+            while (true)
+            {
+                var input = Console.ReadLine();
+                switch (input)
+                {
+                    case "pop":
+                        PhoneBook.TryPop(out string popResult);
+                        break;
+                    case "peek":
+                        PhoneBook.TryPeek(out string peekResult);
+                        break;
+                    default:
+                        PhoneBook.Push(input);
+                        break;
+                }
 
-            //if (PhoneBook.TryGetValue("Dima", out Contact contact))
-            //    contact.PhoneNumber = 345345345345;
+                //Console.WriteLine();
+                //    Console.WriteLine("В стеке: ");
 
-            //Console.WriteLine("Список после изменений");
-            //WriteContactsAll();
+                //    foreach (var word in PhoneBook)
+                //    {
+                //        Console.WriteLine(word);
+                //    }
+            }
         }
-        
-        //public static void WriteContactsAll()
-        //{
-        //    foreach (var contact in PhoneBook)
-        //    {
-        //        Console.Write(contact.Key + ": " + contact.Value.PhoneNumber);
-        //        Console.WriteLine();
-        //    }
-        //}
     }
 }
